@@ -1,0 +1,29 @@
+{% extends 'quota/layout.html'%}
+{% block body %}
+<h1>Quota List:</h1>
+<ul>
+    {% for q in quota %}
+    <li>
+        <a href="{% url 'quota' q.id %}">
+            {{ q }}
+        </a>
+    </li>
+    {% empty %}
+    <li>No quota.</li>
+    {% endfor %}
+</ul>
+
+<a href="../users/">Return</a>
+{% endblock %}
+
+
+<!-- 
+<h2>Register</h2>
+<form action="{% url 'registered' quota.id %}" method="post">
+    {% csrf_token %}
+    <select name="registant">
+        {% for subject in quota %}
+        <option value="{{ quota.id }}"></option>
+        {% endfor %}
+    </select>
+</form> -->

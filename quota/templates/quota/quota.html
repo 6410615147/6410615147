@@ -1,0 +1,20 @@
+{% extends 'quota/layout.html' %}
+{% block body%}
+<h1>Quota: {{ quota.id }}</h1>
+<ul>
+    <li>Subject: {{ quota.subject }}</li>
+    <li>Semester: {{ quota.semester }}</li>
+    <li>Year: {{ quota.year }}</li>
+    <li>Seat: {{ quota.seat}}</li>
+    <li>Status:
+        {% if quota.status %}
+            open
+            <br><a href="{% url 'registered' %}">Register</a>
+        {% else %}
+            close
+        {% endif %}
+    </li>
+</ul>
+
+<a href="../quota/">Return</a>
+{% endblock %}
