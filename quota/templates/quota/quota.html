@@ -9,7 +9,9 @@
     <li>Status:
         {% if quota.status %}
             open
-            <br><a href="{% url 'registered' %}">Register</a>
+            {% if quota.seat != 0%}
+                <br><a href="{% url 'registered' %}">Register</a>
+            {% endif %}
         {% else %}
             close
         {% endif %}
