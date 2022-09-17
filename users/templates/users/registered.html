@@ -1,10 +1,20 @@
 {% extends 'users/layout.html' %}
 {% block body %}
-<h1>Registered</h1>
+<h1>Registered Successful!</h1>
 <h2>Quota:</h2>
 <ul>
-    <li>{{ quota.subject }}</li>
+    {% for subject in subjects %}
+        <li>
+            <form action="{% url 'delete' %}" method="post">
+                {% csrf_token %}
+                {{ subject }} <button name="delete" value="{{ subject }}">Delete</button>
+            </form>
+        </li>
+    {% empty %}
+    <li>No quota registered.</li>
+    {% endfor %}
 </ul>
 
-<a href="../users/">Return</a>
+<a href="../quota">Quota List</a>
+<a href="../users/">Main Menu</a>
 {% endblock %}

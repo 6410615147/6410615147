@@ -33,7 +33,31 @@ def logout_view(request):
 
 
 def registered(request):
-    quota = models.Quota.objects.all().first
-    return render(request, 'users/registered.html',{
-        'quota': quota,
+    subjects = models.Registered.objects.all()
+    if request.method == "POST":
+        registed = request.POST['registed']
+        subject = models.Registered(subject=registed)
+        subject.save()
+        cal_seat(subject, -1)
+    return render(request, 'users/registered.html', {
+        'subjects': subjects,
     })
+
+
+def delete(request):
+    if request.method == "POST":
+        subject = request.POST.get('delete')
+        cal_seat(subject, 1)
+        models.Registered.objects.filter(subject=subject).delete()
+        subjects = models.Registered.objects.all()
+    return render(request, 'users/registered.html', {
+        'message': 'Deleted.',
+        'subjects': subjects,
+    })
+
+def cal_seat(obj, count):
+    quota = models.Quota.objects.all()
+    for q in quota:
+        if obj == q:
+            q.seat += count
+            q.save()

@@ -5,25 +5,26 @@
     {% for q in quota %}
     <li>
         <a href="{% url 'quota' q.id %}">
-            {{ q }}
+            {{ q.id }}. {{q}}
         </a>
     </li>
     {% empty %}
-    <li>No quota.</li>
+    <li>No quota available.</li>
     {% endfor %}
 </ul>
 
-<a href="../users/">Return</a>
-{% endblock %}
-
-
-<!-- 
-<h2>Register</h2>
-<form action="{% url 'registered' quota.id %}" method="post">
+<h1>Register</h1>
+<form action="{% url 'registered' %}" method="post">
     {% csrf_token %}
-    <select name="registant">
-        {% for subject in quota %}
-        <option value="{{ quota.id }}"></option>
+    <select name="registed">
+        {% for q in quota %}
+            {%if q.seat != 0  and q.status %}
+                <option value="{{ q }}">{{ q }}</option>
+            {% endif %}
         {% endfor %}
     </select>
-</form> -->
+    <input type="submit" value="Regist">
+</form>
+
+<a href="../users/">Return</a>
+{% endblock %}

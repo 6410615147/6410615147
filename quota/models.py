@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 
 # Create your models here.
 
@@ -17,13 +18,10 @@ class Quota(models.Model):
     status = models.BooleanField()
 
     def __str__(self):
-        return f"{self.id}. {self.subject} ==> Seat remaining: {self.seat}"
+        return f"{self.subject}"
 
-
-class Registant(models.Model):
-    first = models.CharField(max_length=64)
-    last = models.CharField(max_length=64)
-    quotas = models.ManyToManyField(Quota, blank = True, related_name='registant')
+class Registered(models.Model):
+    subject = models.CharField(max_length=64)
 
     def __str__(self):
-        return f"{self.first} {self.last}"
+        return f"{self.subject}"

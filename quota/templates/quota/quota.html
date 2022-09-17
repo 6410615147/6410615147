@@ -5,18 +5,16 @@
     <li>Subject: {{ quota.subject }}</li>
     <li>Semester: {{ quota.semester }}</li>
     <li>Year: {{ quota.year }}</li>
-    <li>Seat: {{ quota.seat}}</li>
+    <li>Seat remaining: {{ quota.seat}}</li>
     <li>Status:
         {% if quota.status %}
             open
-            {% if quota.seat != 0%}
-                <br><a href="{% url 'registered' %}">Register</a>
-            {% endif %}
         {% else %}
             close
         {% endif %}
     </li>
 </ul>
+
 
 <a href="../quota/">Return</a>
 {% endblock %}

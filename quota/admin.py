@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Registant, Subject, Quota
+from .models import Registered, Quota, Subject
 # Register your models here.
 
 
@@ -8,4 +8,4 @@ class QuotaAdmin(admin.ModelAdmin):
 
 admin.site.register(Quota, QuotaAdmin)
 admin.site.register(Subject)
-admin.site.register(Registant)
+admin.site.register(Registered)

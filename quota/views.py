@@ -10,7 +10,7 @@ def index(request):
     })
 
 def quota(request, quota_id):
-    quota = Quota.objects.get(pk=quota_id)
+    quota = Quota.objects.get(id=quota_id)
     return render(request, 'quota/quota.html', {
         'quota': quota
     })
