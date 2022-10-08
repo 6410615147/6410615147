@@ -14,16 +14,24 @@ class QuotaModelTestCase(TestCase):
         subject = Subject.objects.get(code='AAA')
         self.assertEqual(subject.name, 'Subject A')
 
+        # Test class Subject in models.
+
     def test_quota_model(self):
         subject1 = Subject.objects.first()
         quota = Quota.objects.get(subject=subject1)
         self.assertEqual(str(subject1), str(quota))
+
+        # Test class Quota in models.
 
     def test_registered_model(self):
         subject1 = Subject.objects.first()
         registered = Registered.objects.get(subject=subject1)
         self.assertEqual(str(subject1), str(registered))
 
+        # Test class Registered in models.
+
     def test_registant_model(self):
         registant = Registant.objects.get(user='harry')
         self.assertEqual(str(registant), 'harry')
+
+        # Test class Registant in models.

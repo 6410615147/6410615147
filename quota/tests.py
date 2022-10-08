@@ -17,6 +17,8 @@ class QuotaTestCase(TestCase):
         quota = Quota.objects.first()
         self.assertTrue(quota.is_seat_available())
 
+        # Test seat available, should be True.
+
     def test_seat_not_available(self):
 
         registant1 = Registant.objects.create(
@@ -30,3 +32,5 @@ class QuotaTestCase(TestCase):
         quota.registants.add(registant2)
 
         self.assertFalse(quota.is_seat_available())
+        
+        # Test seat not available, should be False.

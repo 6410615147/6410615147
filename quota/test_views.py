@@ -20,11 +20,15 @@ class QuotaViewTestCase(TestCase):
         response = c.get(reverse('quotas:index'))
         self.assertEqual(response.status_code, 200)
 
+        # Test if index view status code is ok.
+
     def test_index_view_context(self):
         c = Client()
         response = c.get(reverse('quotas:index'))
         self.assertEqual(
             response.context['quota'].count(), 1)
+
+        # Test if context is correctly set.
 
     def test_valid_quota_page(self):
         c = Client()
@@ -32,9 +36,13 @@ class QuotaViewTestCase(TestCase):
         response = c.get(reverse('quotas:quota', args=(q.id,)))
         self.assertEqual(response.status_code, 200)
 
+        # Test if quota page is valid, should return 200.
+
     def test_invalid_quota_page(self):
         max_id = Quota.objects.all().aggregate(Max("id"))['id__max']
 
         c = Client()
         response = c.get(reverse('quotas:quota', args=(max_id+1,)))
         self.assertEqual(response.status_code, 404)
+
+        # Test if quota page is invalid, should return 404.
