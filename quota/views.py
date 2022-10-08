@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from .models import Quota
 # Create your views here.
@@ -10,7 +10,7 @@ def index(request):
     })
 
 def quota(request, quota_id):
-    quota = Quota.objects.get(id=quota_id)
+    quota = get_object_or_404(Quota, pk=quota_id)
     return render(request, 'quota/quota.html', {
         'quota': quota
     })

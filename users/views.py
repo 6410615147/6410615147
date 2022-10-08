@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -7,7 +7,7 @@ from quota import models
 
 def index(request):
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('login'))
+        return HttpResponseRedirect(reverse('users:login'))
     return render(request, 'users/index.html')
 
 def login_view(request):
@@ -33,14 +33,14 @@ def logout_view(request):
 
 
 def registered(request):
-    subjects = models.Registered.objects.all()
     if request.method == "POST":
+        subjects = get_object_or_404(models.Registered)
         registed = request.POST['registed']
         subject = models.Registered(subject=registed)
         subject.save()
         cal_seat(subject, -1)
     return render(request, 'users/registered.html', {
-        'subjects': subjects,
+        'subjects': models.Registered.objects.all(),
     })
 
 

@@ -4,7 +4,7 @@
 <ul>
     {% for q in quota %}
     <li>
-        <a href="{% url 'quota' q.id %}">
+        <a href="{% url 'quotas:quota' q.id %}">
             {{ q.id }}. {{q}}
         </a>
     </li>
@@ -14,7 +14,7 @@
 </ul>
 
 <h1>Register</h1>
-<form action="{% url 'registered' %}" method="post">
+<form action="{% url 'users:registered' %}" method="post">
     {% csrf_token %}
     <select name="registed">
         {% for q in quota %}
